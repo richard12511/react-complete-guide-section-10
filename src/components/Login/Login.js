@@ -29,6 +29,8 @@ function passwordReducer(state, action) {
       };
     case "INPUT_BLUR":
       return { value: state.value, isValid: state.value.trim().length > 6 };
+    default:
+      return { value: "", isValid: false };
   }
 }
 
@@ -48,8 +50,9 @@ const Login = (props) => {
   const { isValid: isPasswordValid } = passwordState;
 
   useEffect(() => {
+    console.log("check validity");
     const identifier = setTimeout(() => {
-      setFormIsValid(emailState.isValid && passwordState.isValid);
+      setFormIsValid(isEmailValid && isPasswordValid);
     }, 500);
 
     return () => {
