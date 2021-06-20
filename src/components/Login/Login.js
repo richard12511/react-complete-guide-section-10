@@ -44,6 +44,9 @@ const Login = (props) => {
 
   const [formIsValid, setFormIsValid] = useState(false);
 
+  const { isValid: isEmailValid } = emailState;
+  const { isValid: isPasswordValid } = passwordState;
+
   useEffect(() => {
     const identifier = setTimeout(() => {
       setFormIsValid(emailState.isValid && passwordState.isValid);
@@ -52,7 +55,7 @@ const Login = (props) => {
     return () => {
       clearTimeout(identifier);
     };
-  }, [emailState, passwordState]);
+  }, [isEmailValid, isPasswordValid]);
 
   const emailChangeHandler = (event) => {
     emailDispatch({
